@@ -1,11 +1,25 @@
+import { useEffect, useState } from "react";
 import Counter from "../components/Counter";
 import logo from "../assets/logo.svg";
 
 export default function Home() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/items")
+      .then((response) => response.json())
+      .then((data) => {
+        setItems(data);
+      });
+  }, []);
+
   return (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <p>Hello Vite + React !</p>
+      {items.map((item) => (
+        <p key={item.id}>{item.title}</p>
+      ))}
 
       <Counter />
 
