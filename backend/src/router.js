@@ -18,4 +18,8 @@ router.put("/users/:id", userControllers.edit);
 router.post("/users", userControllers.add);
 router.delete("/users/:id", userControllers.destroy);
 
+const authControllers = require("./controllers/authControllers");
+
+router.post("/login", authControllers.login);
+
 module.exports = router;
