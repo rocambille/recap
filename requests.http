@@ -2,6 +2,19 @@ GET http://localhost:5000/users
 
 ###
 
+GET http://localhost:5000/items
+
+###
+POST http://localhost:5000/items
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTY4NzI2OTE1NywiZXhwIjoxNjg3MjcyNzU3fQ.qjzuHy-NqIhIJyEKluxG1wWdps-zlV2q_tQTiaK0J3I
+Content-Type: application/json
+
+{
+    "title": "foo"
+}
+
+###
+
 POST http://localhost:5000/users
 Content-Type: application/json
 

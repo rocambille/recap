@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import Counter from "../components/Counter";
 import logo from "../assets/logo.svg";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Home() {
   const [items, setItems] = useState([]);
 
+  const { token } = useAuth();
+
   useEffect(() => {
-    fetch("http://localhost:5000/items")
+    fetch("http://localhost:5000/items", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setItems(data);

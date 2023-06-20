@@ -4,15 +4,17 @@ const router = express.Router();
 
 const itemControllers = require("./controllers/itemControllers");
 
-router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
 router.put("/items/:id", itemControllers.edit);
-router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
 const userControllers = require("./controllers/userControllers");
 
-const { hashPassword, verifyPassword } = require("./services/auth");
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./services/auth");
 
 router.get("/users", userControllers.browse);
 router.get("/users/:id", userControllers.read);
@@ -27,5 +29,10 @@ router.post(
   authControllers.getUserByUsernameWithPasswordAndPassToNext,
   verifyPassword
 );
+
+router.use(verifyToken); // mur d'authentification
+
+router.post("/items", itemControllers.add);
+router.get("/items", itemControllers.browse);
 
 module.exports = router;
